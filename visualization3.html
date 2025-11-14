@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/visualization.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Fairness Comparison</title>
+</head>
+<body>
+    <header>
+        <div class = "nav-container">
+            <div class="team-headline">
+                <p>DV Group 48</p>
+            </div>
+             <div class="menu-toggle" id="menu-toggle">
+                ☰
+            </div>
+            <div class="nav-links" id="nav-links">
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="visualization1.html">National Overview</a></li>
+                        <li><a href="visualization2.html">State Trends</a></li>
+                        <li><a href="visualization3.html" class="active">Fairness Comparison</a></li>
+                        <li><a href="about.html">About</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div id="filters"></div>
+
+        <div class="map-vis-container">
+
+            <h1>Penalties per 10,000 driver licences</h1>
+
+            <div id="bar-1"></div>
+
+        </div>
+        <div class="map-vis-container">
+
+            <h1>Total penalties across all jurisdictions</h1>
+
+            <div id="bar-2"></div>
+
+        </div>
+        
+    </main>
+    <footer>
+        <p>Data sourced from the Bureau of Infrastructure and Transport Research Economics (BITRE)</p>
+        <p>&copy;August2025 - Group 48 | Swinburne University of Technology</p>
+    </footer>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/interaction.js"></script>
+  <script src="js/line-2.js"></script>
+  <script src="js/histogram.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/line-1.js"></script>
+  <script src="js/bar-1.js"></script>
+  <script src="js/bar-2.js"></script>
+  <script src="js/load-data.js"></script>
+</body>
+</html>

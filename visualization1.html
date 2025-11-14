@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/visualization.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Natitonal Overview</title>
+</head>
+<body>
+    <header>
+        <div class = "nav-container">
+            <div class="team-headline">
+                <p>DV Group 48</p>
+            </div>
+             <div class="menu-toggle" id="menu-toggle">
+                ☰
+            </div>
+            <div class="nav-links" id="nav-links">
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="visualization1.html" class="active">National Overview</a></li>
+                        <li><a href="visualization2.html">State Trends</a></li>
+                        <li><a href="visualization3.html">Fairness Comparison</a></li>
+                        <li><a href="about.html">About</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div id="filters"><button id="resetZoom">Reset Zoom</button></div>
+        <section class="vis1-intro">
+            <h1>National Overview of Road Safety Enforcement in Australia (2008-2024)</h1>
+            <p>
+                This page provides a national-level overview of traffic law enforcement across Australia, 
+      based on data from the Bureau of Infrastructure and Transport Research Economics (BITRE).
+      The visualisations below allow users to explore how penalties such as fines, charges, and arrests 
+      vary across different states and over time.
+            </p>
+            <p>
+                Use the filters above to select specific <strong>years, penalty types, violation types, detection methods, age groups</strong> and <strong>jurisdiction</strong>. 
+      Hover over areas or lines for detailed statistics, and use the "Reset Zoom" button to return to the default view.
+            </p>
+        </section>
+
+        <section class = "vis1-map">
+            <h2>Traffic Penalties by State and Territory</h2>
+            <div class="map-vis-container">
+            <div id="map"></div>
+            </div>
+            <p class="vis1-caption">
+                From the map above, it is evident that <strong>New South Wales</strong>,<strong> Queensland</strong>, and 
+    <strong>Victoria</strong> show higher penalty counts compared to smaller states such as Tasmania and the Northern Territory. 
+    This could reflect both larger populations and greater enforcement resources.
+            </p>
+        </section>
+
+        <section class = "vis1-line">
+            <h2>Yearly Trend of Traffic Penalties (2008-2024)</h2>
+            <div class="map-vis-container">
+            <div id="line-1"></div>
+            </div>
+            <p class="vis1-caption">
+                Overall, the total number of penalties across Australia shows a moderate fluctuation from 2008 to 2024, 
+    with peaking at 2021 and a gradual decline in recent years. 
+    The data suggests that enforcement activity has remained consistent nationwide, 
+    with no extreme increases or decreases observed over the long term.
+    <br>
+     It is important to note that <strong>data for arrests and charges is only available for 2023 and 2024</strong>. 
+    Therefore, long-term comparisons for these categories are not included in this trend analysis. 
+    Earlier years mainly contain fine-related records collected under broader enforcement reporting methods.
+            </p>
+        </section>
+        
+    </main>
+    <footer>
+        <p>Data sourced from the Bureau of Infrastructure and Transport Research Economics (BITRE)</p>
+        <p>&copy;August2025 - Group 48 | Swinburne University of Technology</p>
+    </footer>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/line-1.js"></script>
+    <script src="js/interaction.js"></script>
+    <script src="js/load-data.js"></script>
+
+</body>
+</html>

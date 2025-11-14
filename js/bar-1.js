@@ -1,0 +1,156 @@
+// -----------------------------
+// BAR CHART 1 (Penalties per 10,000 Licences per State)
+// -----------------------------
+const drawBar1 = (data) => {
+    const barWidth = 600;
+    const barHeight = 400;
+    const margin = { top: 40, bottom: 50, left: 80, right: 40 };
+    const innerWidth = barWidth - margin.left - margin.right;
+    const innerHeight = barHeight - margin.top - margin.bottom;
+
+    // --- SVG container ---
+    const svg = d3.select("#bar-1")
+        .append("svg")
+        .attr("viewBox", `0 0 ${barWidth} ${barHeight}`)
+        .style("max-width", "100%")
+        .style("height", "auto")
+        .style("display", "block");
+
+    const g = svg.append("g")
+        .attr("class", "bar-group")
+        .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+    // --- Aggregate data by State ---
+    const summary = d3.rollups(
+        data,
+        v => ({
+            fines: d3.sum(v, d => d["FINES PER 10000 LICENCES"]),
+            charges: d3.sum(v, d => d["CHARGES PER 10000 LICENCES"]),
+            arrests: d3.sum(v, d => d["ARRESTS PER 10000 LICENCES"]),
+            total: d3.sum(v, d => d["FINES PER 10000 LICENCES"] + d["CHARGES PER 10000 LICENCES"] + d["ARRESTS PER 10000 LICENCES"])
+        }),
+        d => d.JURISDICTION_FULL
+    ).map(([state, values]) => ({ state, ...values }));
+
+    // --- Scales ---
+    const x = d3.scaleBand()
+        .domain(summary.map(d => d.state))
+        .range([0, innerWidth])
+        .padding(0.2);
+
+    const y = d3.scaleLinear()
+        .domain([0, d3.max(summary, d => d.total)]).nice()
+        .range([innerHeight, 0]);
+
+    svg.node().__xScale__ = x;
+    svg.node().__yScale__ = y;
+    svg.node().__margin__ = margin;
+    svg.node().__innerWidth__ = innerWidth;
+    svg.node().__innerHeight__ = innerHeight;
+
+    const stateAbbrevMap = {
+        "New South Wales": "NSW",
+        "Victoria": "VIC",
+        "Queensland": "QLD",
+        "Western Australia": "WA",
+        "South Australia": "SA",
+        "Tasmania": "TAS",
+        "Northern Territory": "NT",
+        "Australian Capital Territory": "ACT"
+        };
+
+
+    // --- Axes ---
+    g.append("g")
+        .attr("class", "x-axis")
+        .attr("transform", `translate(0,${innerHeight})`)
+        .call(d3.axisBottom(x)
+        .tickFormat(d => stateAbbrevMap[d] || d)
+        );
+
+
+    g.append("g")
+        .attr("class", "y-axis")
+        .call(d3.axisLeft(y));
+
+    g.append("text")
+        .attr("class", "x-label")
+        .attr("text-anchor", "middle")
+        .attr("x", innerWidth / 2)
+        .attr("y", innerHeight + margin.bottom - 10)
+        .attr("fill", "#333")
+        .style("font-size", "14px")
+        .style("font-weight", "bold")
+        .text("State");
+
+       g.append("text")
+        .attr("class", "y-label")
+        .attr("text-anchor", "middle")
+        .attr("transform", `rotate(-90)`)                 
+        .attr("x", -innerHeight / 2)                     
+        .attr("y", -margin.left + 20)                     
+        .attr("fill", "#333")
+        .style("font-size", "14px")
+        .style("font-weight", "bold")
+        .text("Penalties per 10,000 Licences");
+
+    // --- Draw bars ---
+    g.selectAll("rect")
+        .data(summary)
+        .join("rect")
+        .attr("x", d => x(d.state))
+        .attr("y", d => y(d.total))
+        .attr("width", x.bandwidth())
+        .attr("height", d => innerHeight - y(d.total))
+        .attr("fill", "steelblue");
+
+    // Tooltip
+    initializeTooltip(g, "bar");
+};
+
+// -----------------------------
+// UPDATE FUNCTION
+// -----------------------------
+function updateBar1(filteredData, filters) {
+    const g = d3.select("#bar-1 svg .bar-group");
+    if (g.empty()) return;
+
+    const svg = d3.select("#bar-1 svg").node();
+    const x = svg.__xScale__;
+    const y = svg.__yScale__;
+    const margin = svg.__margin__;
+    const innerHeight = svg.__innerHeight__;
+
+    // Aggregate filtered data by State
+    const summary = d3.rollups(
+        filteredData,
+        v => ({
+            fines: d3.sum(v, d => d["FINES PER 10000 LICENCES"]),
+            charges: d3.sum(v, d => d["CHARGES PER 10000 LICENCES"]),
+            arrests: d3.sum(v, d => d["ARRESTS PER 10000 LICENCES"]),
+            total: d3.sum(v, d => d["FINES PER 10000 LICENCES"] + d["CHARGES PER 10000 LICENCES"] + d["ARRESTS PER 10000 LICENCES"])
+        }),
+        d => d.JURISDICTION_FULL
+    ).map(([state, values]) => ({ state, ...values }));
+
+    // Update bars
+    const bars = g.selectAll("rect")
+        .data(summary, d => d.state);
+
+    bars.join(
+        enter => enter.append("rect")
+            .attr("x", d => x(d.state))
+            .attr("width", x.bandwidth())
+            .attr("y", d => y(d.total))
+            .attr("height", d => innerHeight - y(d.total))
+            .attr("fill", "steelblue"),
+        update => update
+            .transition().duration(700)
+            .attr("y", d => y(d.total))
+            .attr("height", d => innerHeight - y(d.total)),
+        exit => exit.remove()
+    );
+
+    // Rebind tooltip
+    initializeTooltip(g, "bar");
+}

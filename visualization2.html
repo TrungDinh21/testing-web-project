@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>State Trends</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/visualization.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <div class="team-headline"><p>DV Group 48</p></div>
+      <div class="menu-toggle" id="menu-toggle">☰</div>
+      <div class="nav-links" id="nav-links">
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="visualization1.html">National Overview</a></li>
+            <li><a href="visualization2.html" class="active">State Trends</a></li>
+            <li><a href="visualization3.html">Fairness Comparison</a></li>
+            <li><a href="about.html">About</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="viz-container">
+      <h1>State Trends – Total Penalties by Jurisdiction</h1>
+      <p>Select filters below to explore penalty trends across states.</p>
+
+      <div class="filter-selection" style="margin-bottom:20px;">
+        <label for="metricSelect">Metric:</label>
+        <select id="metricSelect"></select>
+        <label for="methodSelect">Detection Method:</label>
+        <select id="methodSelect"></select>
+        <label for="ageSelect">Age Group:</label>
+        <select id="ageSelect"></select>
+      </div>
+
+      <h2 class="chart-title">Trend of Total Penalties (All Jurisdictions)</h2>
+      <div id="line-2"></div>
+
+      <h2 class="chart-title">Penalty Distribution</h2>
+      <div id="histogram"></div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Data sourced from the Bureau of Infrastructure and Transport Research Economics (BITRE)</p>
+    <p>&copy;August2025 - Group 48 | Swinburne University of Technology</p>
+  </footer>
+
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/interaction.js"></script>
+  <script src="js/line-2.js"></script>
+  <script src="js/histogram.js"></script>
+</body>
+</html>

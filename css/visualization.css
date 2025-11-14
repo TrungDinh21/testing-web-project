@@ -1,0 +1,165 @@
+#map {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.map-vis-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.vis-row .map-vis-container {
+    flex: 1.5;
+    margin: 0;
+    max-width: none;
+}
+
+
+#resetZoom {
+    padding: 5px;
+    margin-left: 20px;
+    border-radius: 4px;
+    font-family: 'Poppins', sans-serif;
+}
+
+#resetZoom:hover{
+    font-weight: bold;
+    background-color: #ccc;
+}
+
+#line-1 {
+  width: 100%;
+  max-width: 900px;     
+  margin: 20px auto; 
+  border-radius: 8px;
+}
+
+#line-1 svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+#filters {
+    background: #C3E0E0;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    max-width: 900px;
+    font-size: 12px;
+    position: sticky;
+    top: 10px;
+    z-index: 1000;
+}
+
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 12px;
+}
+
+/* Label */
+.filter-group label {
+    font-weight: 600;
+    color: #333;
+    font-size: 12px;
+}
+
+/* Select */
+.filter-group select {
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: 1px solid #888;
+}
+
+/* VISUALIZATION 2 */
+#line-2 {
+  width: 100%;
+  max-width: 900px;     
+  margin: 20px auto; 
+  border-radius: 8px;
+}
+
+#line-2 svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+#histogram {
+  width: 100%;
+  max-width: 900px;     
+  margin: 20px auto; 
+  border-radius: 8px;
+}
+
+#histogram svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+#bar-1 {
+  width: 100%;
+  max-width: 900px;     
+  margin: 20px auto; 
+  border-radius: 8px;
+}
+
+#bar-1 svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+#bar-2 {
+  width: 100%;
+  max-width: 900px;     
+  margin: 20px auto; 
+  border-radius: 8px;
+}
+
+#bar-2 svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+/*Responsive*/
+@media screen and (max-width: 768px) {
+    #filters {
+        display: flex;
+        align-items: center;
+        max-width: 600px;
+    }
+    .filter-group {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    }
+    .filter-group label {
+        font-weight: 100;
+        color: #333;
+        font-size: 10px;
+    }
+    .filter-group select {
+        padding: 0;
+        border-radius: 6px;
+        border: 1px solid #888;
+        font-size: 10px;
+    }
+
+    .filter-group select option {
+        font-size: 10px;
+    }
+}
+
