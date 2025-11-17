@@ -1,10 +1,26 @@
+// ======================================================================
+// DRAW MAP OF AUSTRALIA (GEOJSON + PENALTIES)
+// This function runs once when the page loads.
+// It renders:
+//   - Choropleth map (by total penalties or selected penalty type)
+//   - Legend (dynamic, updates on filter change)
+//   - Zoom + pan interactions
+//   - Tooltip on hover
+// ======================================================================
 const drawMap = (geoData, penalties) => {
+
+  // ---------------------------
+  // CHART LAYOUT CONFIGURATION
+  // ---------------------------
   const mapWidth = 900;
-  const mapHeight = Math.min(window.innerHeight * 0.7, 450); 
+  const mapHeight = Math.min(window.innerHeight * 0.7, 450);  // responsive height
   const margin = { top: 40, right: 40, bottom: 40, left: 40 };
   const innerWidth = mapWidth - margin.left - margin.right;
   const innerHeight = mapHeight - margin.top - margin.bottom;
 
+  // ---------------------------
+  // CREATE RESPONSIVE SVG
+  // ---------------------------
   const svg = d3.select("#map")
     .append("svg")
     .attr("viewBox", `0 0 ${mapWidth} ${mapHeight}`)
@@ -13,58 +29,73 @@ const drawMap = (geoData, penalties) => {
     .style("display", "block")
     .style("border", "1px solid #ccc");
 
+  // Main group wrapper for map shapes
   const g = svg.append("g")
-  .attr("class", "map-group")
-  .attr("transform", `translate(${margin.left},${margin.top})`);
+    .attr("class", "map-group")
+    .attr("transform", `translate(${margin.left},${margin.top})`);
 
-
+  // ---------------------------
+  // MERCATOR PROJECTION (AUSTRALIA)
+  // ---------------------------
   const projection = d3.geoMercator()
-    .center([134, -28])
-    .scale(mapWidth * 0.65)
-    .translate([innerWidth / 2, innerHeight / 2]);
+    .center([134, -28])                 // centre of Australia
+    .scale(mapWidth * 0.65)             // zoom level
+    .translate([innerWidth / 2, innerHeight / 2]);  // centre in view
 
   const path = d3.geoPath().projection(projection);
 
-  // --- Aggregate penalties ---
+  // ======================================================================
+  // DATA AGGREGATION — compute penalties by jurisdiction
+  // ======================================================================
   const aggregated = d3.rollups(
     penalties,
     v => {
       const fines = d3.sum(v, d => d.FINES);
       const charges = d3.sum(v, d => d.CHARGES);
       const arrests = d3.sum(v, d => d.ARRESTS);
-      const penaltiesCount = fines + charges + arrests;
+      const penaltiesCount = fines + charges + arrests; // combined metric
       return { fines, charges, arrests, penaltiesCount };
     },
     d => d.JURISDICTION_FULL
   );
 
-  // --- Merge aggregated data with geojson ---
+  // ======================================================================
+  // MERGE RESULTS INTO GEOJSON FEATURES
+  // Ensures each state polygon contains its penalty data
+  // ======================================================================
   geoData.features.forEach(f => {
     const match = aggregated.find(([stateName]) => stateName === f.properties.STATE_NAME);
     f.properties.data = match
       ? match[1]
-      : { fines: 0, charges: 0, arrests: 0, penaltiesCount: 0 };
+      : { fines: 0, charges: 0, arrests: 0, penaltiesCount: 0 };  // default
   });
 
+  // Max value used for choropleth domain
   const maxValue = d3.max(aggregated, d => d[1].penaltiesCount);
 
-  // --- Color scale ---
+  // ======================================================================
+  // COLOR SCALE (SEQUENTIAL BLUE)
+  // ======================================================================
   const colorScale = d3.scaleSequential()
     .domain([0, maxValue])
     .interpolator(d3.interpolateBlues);
 
-  // --- Legend (gradient) ---
-  // legend dimensions
+  // ======================================================================
+  // LEGEND (GRADIENT SCALE)
+  // ======================================================================
+
   const legendWidth = 200;
   const legendHeight = 10;
-  const legendX = innerWidth - legendWidth; // right-aligned inside g
-  const legendY = innerHeight + 12; // just below map paths
+  const legendX = innerWidth - legendWidth;
+  const legendY = innerHeight + 12;
 
-  // ensure defs exists
+  // Ensure <defs> exists only once
   const defs = svg.select("defs").empty() ? svg.append("defs") : svg.select("defs");
 
-  // create gradient (id used for rect fill)
+  // Gradient ID for reuse during updates
   const gradientId = "map-legend-gradient";
+
+  // Gradient stops
   defs.append("linearGradient")
     .attr("id", gradientId)
     .attr("x1", "0%").attr("y1", "0%")
@@ -76,12 +107,12 @@ const drawMap = (geoData, penalties) => {
     .attr("offset", d => `${d * 100}%`)
     .attr("stop-color", d => d3.interpolateBlues(d));
 
-  // legend group
+  // Legend container
   const legendG = g.append("g")
     .attr("class", "legend")
     .attr("transform", `translate(${legendX}, ${legendY})`);
 
-  // gradient rect
+  // Gradient colour bar
   legendG.append("rect")
     .attr("class", "legend-rect")
     .attr("width", legendWidth)
@@ -89,7 +120,7 @@ const drawMap = (geoData, penalties) => {
     .attr("fill", `url(#${gradientId})`)
     .attr("stroke", "#ccc");
 
-  // min / max labels
+  // Labels: min and max
   legendG.append("text")
     .attr("class", "legend-min")
     .attr("x", 0)
@@ -107,17 +138,18 @@ const drawMap = (geoData, penalties) => {
     .style("font-size", "11px")
     .text(d3.format(".2s")(maxValue));
 
-  // title
+  // Legend title
   legendG.append("text")
     .attr("class", "legend-title")
     .attr("x", legendWidth / 2)
     .attr("y", -6)
     .attr("text-anchor", "middle")
-    .attr("fill", "#333")
     .style("font-size", "12px")
     .text("Range values");
 
-  // --- Draw states ---
+  // ======================================================================
+  // DRAW STATE SHAPES
+  // ======================================================================
   g.selectAll("path")
     .data(geoData.features)
     .join("path")
@@ -126,27 +158,40 @@ const drawMap = (geoData, penalties) => {
     .attr("stroke", "#333")
     .attr("stroke-width", 0.5);
 
-// --- Responsive when resize ---
+  // ======================================================================
+  // RESPONSIVE HEIGHT HANDLING
+  // ======================================================================
   window.addEventListener("resize", () => {
     const newHeight = Math.min(window.innerHeight * 0.7, 450);
     svg.attr("viewBox", `0 0 ${mapWidth} ${newHeight}`);
   });
 
+  // ======================================================================
+  // ENABLE ZOOM + TOOLTIP
+  // ======================================================================
   const initialTransform = d3.zoomIdentity
-  .translate(margin.left, margin.top)
-  .scale(1);
+    .translate(margin.left, margin.top)
+    .scale(1);
 
-   initializeZoom(svg, g, initialTransform);
-   let selectedKey = "penaltiesCount";
-   initializeTooltip(g, "map", selectedKey);
+  initializeZoom(svg, g, initialTransform);
 
-
+  let selectedKey = "penaltiesCount";  // default
+  initializeTooltip(g, "map", selectedKey);
 };
 
+
+
+// ======================================================================
+// UPDATE MAP WHEN FILTERS CHANGE
+// Triggered when the user selects new filters (metric, penalty type, etc.)
+// ======================================================================
 function updateMap(geoData, filteredPenalties, filters) {
-  // select the same group created in drawMap
+
   const g = d3.select("#map svg .map-group");
-  // --- Aggregate ---
+
+  // ---------------------------
+  // RE-AGGREGATE USING FILTERED DATA
+  // ---------------------------
   const aggregated = d3.rollups(
     filteredPenalties,
     v => {
@@ -159,7 +204,7 @@ function updateMap(geoData, filteredPenalties, filters) {
     d => d.JURISDICTION_FULL
   );
 
-  // --- Merge into geojson ---
+  // Attach updated values back into GeoJSON
   geoData.features.forEach(f => {
     const match = aggregated.find(([stateName]) => stateName === f.properties.STATE_NAME);
     f.properties.data = match
@@ -167,30 +212,40 @@ function updateMap(geoData, filteredPenalties, filters) {
       : { fines: 0, charges: 0, arrests: 0, penaltiesCount: 0 };
   });
 
-  // --- Define which penalty to choose ---
+  // ---------------------------
+  // DETERMINE SELECTED PENALTY KEY
+  // ---------------------------
   let selectedKey = "penaltiesCount";
   if (filters.penalty === "Fines") selectedKey = "fines";
   else if (filters.penalty === "Charges") selectedKey = "charges";
   else if (filters.penalty === "Arrests") selectedKey = "arrests";
 
-  // --- Update color scale ---
+  // ---------------------------
+  // UPDATE COLOR SCALE
+  // ---------------------------
   const maxValue = d3.max(geoData.features, d => d.properties.data[selectedKey]);
+
   const colorScale = d3.scaleSequential()
     .domain([0, maxValue])
     .interpolator(d3.interpolateBlues);
 
-  // --- Update color map ---
+  // Update map colouring
   d3.select("#map svg g")
     .selectAll("path")
     .transition()
     .duration(600)
     .attr("fill", d => colorScale(d.properties.data[selectedKey] || 0));
 
-    // --- Update legend gradient + labels ---
+  // ======================================================================
+  // UPDATE LEGEND (GRADIENT + LABELS)
+  // ======================================================================
   const svg = d3.select("#map svg");
-  // recreate gradient stops (remove previous gradient then append new)
+
+  // Remove old gradient and rebuild it
   svg.select("#map-legend-gradient").remove();
+
   const defs = svg.select("defs").empty() ? svg.append("defs") : svg.select("defs");
+
   defs.append("linearGradient")
     .attr("id", "map-legend-gradient")
     .attr("x1", "0%").attr("y1", "0%")
@@ -202,14 +257,16 @@ function updateMap(geoData, filteredPenalties, filters) {
     .attr("offset", d => `${d * 100}%`)
     .attr("stop-color", d => d3.interpolateBlues(d));
 
-  // update rect fill to new gradient id
-  g.select(".legend-rect").attr("fill", `url(#map-legend-gradient)`);
+  // Apply to legend rectangle
+  g.select(".legend-rect").attr("fill", "url(#map-legend-gradient)");
 
-  // update min/max labels
+  // Update min and max labels
   const formattedMax = d3.format(".2s")(maxValue || 0);
   g.select(".legend-min").text(0);
   g.select(".legend-max").text(formattedMax);
 
-  // --- Update tooltip ---
+  // ---------------------------
+  // REBIND TOOLTIP TO USE NEW SELECTED METRIC
+  // ---------------------------
   initializeTooltip(g, "map", selectedKey);
 }

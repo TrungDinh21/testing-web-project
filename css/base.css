@@ -61,7 +61,6 @@ body {
 .vis1-intro{
   max-width: 1200px;
   margin: 30px auto;
-  color: #333;
   line-height: 1.7;
   font-size: 16px;
 }
@@ -69,28 +68,53 @@ body {
 .vis1-intro h1{
   font-size: 28px;
   margin-bottom: 10px;
-  color: #1f1f1f;
   text-align: center;
 }
 
-.vis1-map, .vis1-line{
-  margin: 40px auto;
-  max-width: 1200px;
+/* Layout for map & line side-by-side */
+.vis-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0;
+  margin-top: 20px;
 }
 
-.vis1-map h2 {
-  text-align: center;
+.vis-row p {
+  flex: 1;
+  font-size: 15px;
 }
 
-.vis1-line h2 {
-  text-align: center;
+.map-vis-container {
+  flex: 1;
 }
 
-.vis1-caption{
-  font-size: 16px;
-  color: #1f1f1f;
-  margin-top: 10px;
+.vis1-caption {
+  padding: none;
 }
+
+.vis-row .reverse {
+  flex-direction: row-reverse;
+}
+
+  .vis1-map h2{
+    text-align: left;
+    margin-left: 40px;
+    margin-bottom: 10px;
+  }
+    .vis1-line h2{
+    text-align: right;
+    margin-right: 60px;
+  }
+
+  .vis1-intro a {
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .vis1-intro a:hover{
+    color: rgb(106, 52, 231);
+  }
 
 /* ---------- FOOTER ---------- */
 footer {
@@ -100,7 +124,29 @@ footer {
   font-size: 14px;
   padding: 12px 0;
   width: 100%;
+  bottom: 0;
 }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+footer {
+  margin-top: auto;
+}
+
 
 /* ---------- MOBILE MENU ---------- */
 .menu-toggle {
@@ -112,6 +158,18 @@ footer {
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 767px) {
+  .vis1-map h2{
+    text-align: center;
+  }
+    .vis1-line h2{
+    text-align: center;
+  }
+  p{
+    font-size: 8px;
+  }
+  .vis-row p{
+    font-size: 8px;
+  }
   .nav-container {
     flex-direction: column;
     align-items: flex-start;
@@ -172,21 +230,9 @@ footer {
     cursor: pointer;
   }
 
-  .team-headline {
-    width: 100%;
-    text-align: left;
-    color: #ffd60a;
-  }
-
-  .group-label {
-    color: #ffd60a;
-    text-align: center;
-    font-size: 15px;
-    margin-top: 5px;
-  }
-
   footer {
     left: 0;
+    bottom: 0;
     width: 100%;
     background-color: #1f1f1f;
     color: lightgrey;
@@ -195,9 +241,38 @@ footer {
     padding: 10px 0;
     z-index: 10;  
   }
+
+.vis-row {
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  margin-top: 20px;
+  display:contents;
+  }
+
+  .vis-row p {
+    padding: 20px;
+  }
+
+  .vis1-intro{
+    padding: 20px;
+}
+
 }
 /* ---------- TABLET MENU ---------- */
 @media (max-width: 1024px) {
+    .vis1-map h2{
+    text-align: center;
+  }
+    .vis1-line h2{
+    text-align: center;
+  }
+  p {
+    font-size: 12px;
+  }
+  .vis-row p {
+    font-size: 12px;
+  }
   .nav-container {
     flex-direction: column;
     align-items: flex-start;
@@ -258,8 +333,10 @@ footer {
     cursor: pointer;
   }
 
+
   footer {
     left: 0;
+    bottom: 0;
     width: 100%;
     background-color: #1f1f1f;
     color: lightgrey;
@@ -268,9 +345,121 @@ footer {
     padding: 10px 0;
     z-index: 10;
   }
+
+    .vis-row p {
+    padding: 20px;
+  }
+
+  .vis1-intro{
+    padding: 20px;
+  }
 }
 
-.chart-title { text-align:center; margin-top:20px; color:#222; } // CHANGES ANDREW - START
+/* ========== ABOUT PAGE STYLES ========== */
+
+.about-page {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Page Title */
+.about-page > h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+/* Section container (card style) */
+.about-page section {
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+/* Section headings */
+.about-page h2 {
+    font-size: 22px;
+    font-weight: 600;
+    border-left: 6px solid #1f1f1f;
+    padding-left: 10px;
+    margin-bottom: 15px;
+}
+
+.about-page h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 18px;
+    margin-bottom: 6px;
+}
+
+.about-page h4 {
+  margin-left: 20px;
+}
+
+/* Lists */
+.about-page ul li {
+    margin-bottom: 6px;
+    line-height: 1.6;
+    margin-left: 20px;
+}
+
+/* Table styling */
+.about-page table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.about-page table th,
+.about-page table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.about-page table th {
+    background: #f7f7f7;
+    font-weight: 600;
+}
+
+/* Link styling */
+.about-page a {
+    color: #31312f;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.about-page a:hover {
+    text-decoration: underline;
+    color: #1f1f1f;
+}
+
+/* Academic declaration highlight */
+.about-page .ac-declaration {
+    border-left: 6px solid #1f1f1f;
+    background: #fffce6;
+}
+
+/* Responsive fix */
+@media(max-width: 768px) {
+    .about-page {
+        margin-top: 20px;
+        padding: 0 15px;
+    }
+    .about-page section {
+        padding: 18px;
+    }
+    .about-page > h1 {
+        font-size: 26px;
+    }
+}
+
+
+.chart-title { text-align:center; margin-top:20px; color:#222; } 
     svg text { font-size:12px; }
     .tooltip {
       position:absolute;
@@ -300,4 +489,306 @@ footer {
       height:12px;
       border-radius:2px;
     }
-//CHANGES ANDREW - END
+
+/* ==========================================================
+   FAIRNESS COMPARISON – 2 CHARTS SIDE BY SIDE
+   ========================================================== */
+
+.fairness-grid {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+.fairness-grid .fairness-chart {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #e6e6e6;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.fairness-grid h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: #222;
+}
+
+/* ==========================================================
+   TEXT SECTION BELOW CHARTS
+   ========================================================== */
+
+.fairness-analysis {
+    max-width: 1000px;
+    margin: 30px auto 60px;
+    padding: 0 20px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #333;
+}
+
+.fairness-analysis p {
+    margin-bottom: 18px;
+}
+
+/*STATE TRENDS */
+.fairness-intro {
+    max-width: 1200px;
+    margin: 30px auto;
+    color: #333;
+    font-size: 16px;
+    line-height: 1.7;
+    padding: 0 20px;
+}
+
+.fairness-intro h1 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #1f1f1f;
+}
+
+.fairness-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+
+.fairness-chart {
+    flex: 3;
+    min-width: 300px;
+}
+
+.fairness-text {
+    flex: 2;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #333;
+}
+
+
+
+/* ---------- HERO SECTION ---------- */
+.hero-section {
+    width: 100%;
+    height: 100vh;
+    padding: 120px 20px;
+    background: linear-gradient(135deg, #1f1f1f, #3a3a3a);
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-inner {
+    max-width: 900px;
+    margin: auto;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.project-title {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 20px;
+}
+
+.project-tagline {
+    font-size: 18px;
+    opacity: 0.9;
+    margin-bottom: 25px;
+}
+
+.hero-actions {
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 12px 24px;
+    border-radius: 50px;
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s ease;
+}
+
+.btn-primary {
+    background: white;
+    color: #1f1f1f;
+    padding: 12px 28px;
+    border-radius: 20px;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+.btn-primary:hover {
+    background: #e6e6e6;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+}
+
+
+/* ---------- INTRO SECTION ---------- */
+.content-section {
+    max-width: 1100px;
+    padding: 60px 20px;
+    background: white;
+    margin: 20px auto;
+    border-radius: 14px;
+    border: 1px solid #e6e6e6;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.section-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #222;
+}
+
+.intro-grid {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.intro-text {
+  flex: 4;
+}
+
+.intro-text p {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.intro-quick {
+    flex: 1;
+    background: #f8f8f8;
+    padding: 40px;
+    border-radius: 12px;
+    border: 1px solid #e4e4e4;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+}
+
+.img-resize{
+  width: 100%;
+  
+  background-color: darkblue;
+}
+
+.mini-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.quick-list li {
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* ---------- PURPOSE SECTION ---------- */
+.alt-bg {
+    background: white;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.section-text {
+    max-width: 1000px;
+    padding-left: 40px;
+    color: #444;
+    margin-bottom: 25px;
+    line-height: 1.7;
+}
+
+.key-questions ul {
+  padding-left: 40px;
+}
+
+.key-questions ul li {
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+/* ---------- VISUALISATION CARDS ---------- */
+.vis-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    margin-top: 35px;
+}
+
+.vis-card {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    border: 1px solid #e6e6e6;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: 0.25s ease;
+}
+
+.vis-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+}
+
+.vis-card-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #1f1f1f;
+}
+
+.vis-card-text {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.vis-card-link {
+    text-decoration: none;
+    font-weight: 600;
+    color: #1f1f1f;
+    transition: 0.2s;
+}
+
+.vis-card-link:hover {
+    color: #666;
+    text-decoration: underline;
+}
+
+/* ---------- ANIMATIONS ---------- */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width: 900px) {
+    .project-title { font-size: 30px; }
+    .intro-grid { flex-direction: column; }
+    .intro-quick { width: 100%; }
+}
+
+@media (max-width: 600px) {
+    .hero-section { padding: 90px 20px; }
+    .project-title { font-size: 26px; }
+    .project-tagline { font-size: 16px; }
+}
+

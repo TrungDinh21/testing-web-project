@@ -1,24 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Metadata for mobile-friendly and UTF-8 encoding -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Base stylesheet for global styling -->
     <link rel="stylesheet" href="css/base.css">
+
+    <!-- Google Font: Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <title>Home</title>
 </head>
+
 <body>
+
+    <!-- ==========================
+         HEADER + NAVIGATION BAR
+         ========================== -->
     <header>
-        <div class = "nav-container">
+        <div class="nav-container">
+
+            <!-- Team label (left side) -->
             <div class="team-headline">
                 <p>DV Group 48</p>
             </div>
-             <div class="menu-toggle" id="menu-toggle">
+
+            <!-- Mobile menu toggle icon (hamburger) -->
+            <div class="menu-toggle" id="menu-toggle">
                 ☰
             </div>
+
+            <!-- Navigation links container -->
             <div class="nav-links" id="nav-links">
                 <nav>
                     <ul>
+                        <!-- Active page highlighted -->
                         <li><a href="index.html" class="active">Home</a></li>
                         <li><a href="visualization1.html">National Overview</a></li>
                         <li><a href="visualization2.html">State Trends</a></li>
@@ -27,17 +45,179 @@
                     </ul>
                 </nav>
             </div>
+
         </div>
     </header>
-    <main>
-        
+
+    <!-- ==========================
+         MAIN PAGE CONTENT
+         ========================== -->
+    <main id="home-main">
+
+        <!-- ==========================
+             HERO SECTION (Large header banner)
+             ========================== -->
+        <section id="hero-section" class="hero-section">
+
+            <!-- Wrapper for hero text -->
+            <div class="hero-inner">
+
+                <!-- Project title / main headline -->
+                <h1 id="project-title" class="project-title">
+                    Enforcing Fairness: Visualizing Road Safety Enforcement Across Australia (2008–2024)
+                </h1>
+
+                <!-- Short subtitle below the main title -->
+                <p id="project-tagline" class="project-tagline">
+                    Interactive visualisations to explore whether enforcement (fines, charges, arrests) 
+                    is applied fairly across Australian jurisdictions.
+                </p>
+
+                <!-- Call-to-action button linking to intro section -->
+                <div class="hero-actions">
+                    <a href="#intro-section" class="btn btn-primary" id="cta-explore">Get to know us</a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==========================
+             INTRO / BACKGROUND SECTION
+             ========================== -->
+        <section id="intro-section" class="content-section">
+
+            <!-- Section title -->
+            <h2 class="section-title" id="intro-title">Background & Motivation</h2>
+
+            <!-- Grid layout: text on left, quick facts on right -->
+            <div class="intro-grid">
+
+                <!-- Left column: description + BITRE image -->
+                <div class="intro-text" id="intro-text">
+
+                    <!-- Paragraphs explaining purpose of dataset -->
+                    <p>
+                        This project focuses on the enforcement of road safety laws across Australia (2008-2024),
+                        using data provided by the Bureau of Infrastructure and Transport Research Economics (BITRE).
+                        <br>The aim is to investigate whether enforcement activities such as <strong>fines</strong>, 
+                        <strong>charges</strong> and <strong>arrests</strong> are applied equitably across states and territories 
+                        after accounting for licence counts.
+                    </p>
+
+                    <p>
+                        <strong>Target users</strong>: policymakers, researchers, journalists and the public. 
+                        The visualisations support transparency and data-driven discussion about enforcement fairness and policy.
+                    </p>
+
+                    <!-- BITRE logo -->
+                    <img class="img-resize" src="images/BITRE.png" alt="BITRE logo">
+                </div>
+
+                <!-- Right column: quick facts box -->
+                <aside class="intro-quick" id="intro-quick">
+                    <h3 class="mini-title">Quick facts</h3>
+                    <ul class="quick-list">
+                        <li><strong>Time span:</strong> 2008–2024</li>
+                        <li><strong>Main source:</strong> BITRE Road Safety Enforcement</li>
+                        <li><strong>Normalization:</strong> Penalties per 10,000 driver licences</li>
+                        <li><strong>Pages:</strong></li>
+
+                        <!-- Ordered list of visualization pages -->
+                        <ol style="padding-left: 20px;">
+                            <li>National Overview</li>
+                            <li>State Trends</li>
+                            <li>Fairness Comparison</li>
+                        </ol>
+                    </ul>
+                </aside>
+
+            </div>
+        </section>
+
+        <!-- ==========================
+             PURPOSE + KEY QUESTIONS SECTION
+             ========================== -->
+        <section id="purpose-section" class="content-section alt-bg">
+
+            <!-- Title -->
+            <h2 class="section-title" id="purpose-title">Purpose & Key Questions</h2>
+
+            <!-- Explanation paragraph -->
+            <p class="section-text">
+                The primary goal of this project is to reveal how enforcement varies by time, jurisdiction 
+                and demographic group, and to allow fair interstate comparisons by normalising counts 
+                by driver licences.
+            </p>
+
+            <!-- Bullet list of key questions -->
+            <div class="key-questions" id="key-questions">
+                <h3 class="mini-title">Key questions</h3>
+                <ul>
+                    <li>How has enforcement changed over time?</li>
+                    <li>Which jurisdictions enforce most strictly (absolute and per-licence)?</li>
+                    <li>Which offence types and detection methods are most prevalent?</li>
+                    <li>How do penalties differ across age groups?</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ==========================
+             VISUALISATION OVERVIEW CARDS
+             Three clickable cards linking to each visualisation page
+             ========================== -->
+        <section id="vis-overview" class="content-section alt-bg">
+
+            <!-- Title -->
+            <h2 class="section-title">Visualisation overview</h2>
+
+            <!-- Card container -->
+            <div class="vis-cards" id="vis-cards">
+
+                <!-- Card 1: National Overview -->
+                <article class="vis-card" id="vis-card-1">
+                    <h3 class="vis-card-title">National Overview</h3>
+                    <p class="vis-card-text">
+                        Choropleth map and national trend line <br>
+                        Explore penalties across states and over time.
+                    </p>
+                    <a class="vis-card-link" href="visualization1.html">Open page →</a>
+                </article>
+
+                <!-- Card 2: State Trends -->
+                <article class="vis-card" id="vis-card-2">
+                    <h3 class="vis-card-title">State Trends</h3>
+                    <p class="vis-card-text">
+                        Multi-state trend lines and histogram to compare jurisdictions over time.
+                    </p>
+                    <a class="vis-card-link" href="visualization2.html">Open page →</a>
+                </article>
+
+                <!-- Card 3: Fairness Comparison -->
+                <article class="vis-card" id="vis-card-3">
+                    <h3 class="vis-card-title">Fairness Comparison</h3>
+                    <p class="vis-card-text">
+                        Total penalties vs penalties per 10,000 licences <br>
+                        Normalised interstate comparisons.
+                    </p>
+                    <a class="vis-card-link" href="visualization3.html">Open page →</a>
+                </article>
+
+            </div>
+        </section>
+
     </main>
+
+    <!-- ==========================
+         FOOTER
+         ========================== -->
     <footer>
         <p>Data sourced from the Bureau of Infrastructure and Transport Research Economics (BITRE)</p>
         <p>&copy;August2025 - Group 48 | Swinburne University of Technology</p>
     </footer>
+
+    <!-- JS for mobile navigation -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="js/nav.js"></script>
-    <script src="js/load-data.js"></script>
+
 </body>
 </html>

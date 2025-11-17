@@ -1,63 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <!-- Basic metadata -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>State Trends</title>
+
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/visualization.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <title>State Trends</title>
 </head>
+
 <body>
-  <header>
-    <div class="nav-container">
-      <div class="team-headline"><p>DV Group 48</p></div>
-      <div class="menu-toggle" id="menu-toggle">☰</div>
-      <div class="nav-links" id="nav-links">
-        <nav>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="visualization1.html">National Overview</a></li>
-            <li><a href="visualization2.html" class="active">State Trends</a></li>
-            <li><a href="visualization3.html">Fairness Comparison</a></li>
-            <li><a href="about.html">About</a></li>
-          </ul>
-        </nav>
-      </div>
-    </div>
-  </header>
 
-  <main>
-    <div class="viz-container">
-      <h1>State Trends – Total Penalties by Jurisdiction</h1>
-      <p>Select filters below to explore penalty trends across states.</p>
+    <!-- ========================= HEADER & NAVIGATION ========================= -->
+    <header>
+        <div class="nav-container">
 
-      <div class="filter-selection" style="margin-bottom:20px;">
-        <label for="metricSelect">Metric:</label>
-        <select id="metricSelect"></select>
-        <label for="methodSelect">Detection Method:</label>
-        <select id="methodSelect"></select>
-        <label for="ageSelect">Age Group:</label>
-        <select id="ageSelect"></select>
-      </div>
+            <!-- Group name on navbar -->
+            <div class="team-headline">
+                <p>DV Group 48</p>
+            </div>
 
-      <h2 class="chart-title">Trend of Total Penalties (All Jurisdictions)</h2>
-      <div id="line-2"></div>
+            <!-- Mobile menu icon -->
+            <div class="menu-toggle" id="menu-toggle">☰</div>
 
-      <h2 class="chart-title">Penalty Distribution</h2>
-      <div id="histogram"></div>
-    </div>
-  </main>
+            <!-- Navigation links -->
+            <div class="nav-links" id="nav-links">
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="visualization1.html">National Overview</a></li>
+                        <li><a href="visualization2.html" class="active">State Trends</a></li>
+                        <li><a href="visualization3.html">Fairness Comparison</a></li>
+                        <li><a href="about.html">About</a></li>
+                    </ul>
+                </nav>
+            </div>
 
-  <footer>
-    <p>Data sourced from the Bureau of Infrastructure and Transport Research Economics (BITRE)</p>
-    <p>&copy;August2025 - Group 48 | Swinburne University of Technology</p>
-  </footer>
+        </div>
+    </header>
 
-  <script src="https://d3js.org/d3.v7.min.js"></script>
-  <script src="js/nav.js"></script>
-  <script src="js/interaction.js"></script>
-  <script src="js/line-2.js"></script>
-  <script src="js/histogram.js"></script>
+    <!-- ========================= MAIN CONTENT ========================= -->
+    <main>
+
+        <!-- Dynamic filter bar (generated with JS) -->
+        <div id="filters2"></div>
+
+        <!-- ========================= INTRO SECTION ========================= -->
+        <section class="fairness-intro">
+            <h1>State Trends – Total Penalties by Jurisdiction (2008–2024)</h1>
+
+            <p>
+                This page allows users to examine how road safety enforcement differs across Australian jurisdictions
+                from 2008 to 2024. The visualisations display both the Total Penalty Trends and the Penalty
+                Distribution,
+                offering insight into whether variations are due to stricter policing or differences in population
+                sizes.
+                <br>
+                Use the filters above to select specific violation types, detection methods, and age groups.
+                The charts update dynamically based on your selections, and hovering reveals detailed values
+                such as fines, charges, and arrests.
+            </p>
+        </section>
+
+        <!-- ========================= LINE CHART SECTION ========================= -->
+        <section class="fairness-row">
+
+            <!-- Left: Line Chart -->
+            <div class="fairness-chart">
+                <h2>Trend of Total Penalties (All Jurisdictions)</h2>
+                <div id="line-2"></div>
+            </div>
+
+            <!-- Right: Caption text -->
+            <div class="fairness-text">
+                <p>
+                    This chart highlights yearly penalty trends for all Australian states and territories.
+                    <br><br>Each jurisdiction is represented with a unique colour, which is easy to identify the pattern
+                    between lines.<br><br>
+                    The trend clearly shows that <strong>Victoria records the highest penalty peak in 2018</strong>,
+                    while other states display more gradual changes throughout the 16-year period.
+                </p>
+            </div>
+
+        </section>
+
+        <!-- ========================= HISTOGRAM SECTION ========================= -->
+        <section class="fairness-row reverse">
+
+            <!-- Left: Caption text -->
+            <div class="fairness-text">
+                <p>
+                    This histogram illustrates the statistical distribution of penalty counts based on the chosen filter
+                    settings.<br><br>
+                    By grouping penalty values into bins, the chart highlights important characteristics of the dataset,
+                    such as skewness, clustering, or the presence of extreme values.<br><br>
+                    This distribution-oriented perspective complements the multi-line chart by showing how penalty
+                    magnitudes vary, rather than how they change over time.
+                </p>
+            </div>
+
+            <!-- Right: Histogram -->
+            <div class="fairness-chart">
+                <h2>Penalty Distribution</h2>
+                <div id="histogram"></div>
+            </div>
+
+        </section>
+
+        <!-- ========================= SUMMARY SECTION ========================= -->
+        <section class="fairness-intro">
+            <p>
+                Combined, these visualisations support meaningful comparisons of road safety enforcement activity across
+                Australia.
+                By providing both total and distribution-based insights, this page encourages fair and evidence-based
+                evaluation
+                of each state's road enforcement policies.
+            </p>
+        </section>
+
+        <!-- ========================= DATA LIMITATIONS NOTE ========================= -->
+        <p style="color:rgb(73, 73, 73); font-size: 12px; font-style:italic; margin: 20px;">
+            The dataset includes several limitations that may affect interpretation.
+            Manual enforcement speeding data is incomplete prior to 2016.
+            Unlicensed driving and age group categories are mainly recorded from 2023–2024.
+            Variations in population, data coverage, and the number of detection cameras across states influence penalty
+            counts.
+            Therefore, figures should be viewed as indicative rather than directly comparable across jurisdictions.
+        </p>
+
+    </main>
+
+    <!-- ========================= FOOTER ========================= -->
+    <footer>
+        <p>Data sourced from the Bureau of Infrastructure and Transport Research Economics (BITRE)</p>
+        <p>&copy; August 2025 - Group 48 | Swinburne University of Technology</p>
+    </footer>
+
+    <!-- ========================= JAVASCRIPT FILES ========================= -->
+    <script src="https://d3js.org/d3.v7.min.js"></script> <!-- D3.js library -->
+    <script src="js/nav.js"></script> <!-- Navbar toggle script -->
+    <script src="js/interaction.js"></script> <!-- Filter & interaction logic -->
+    <script src="js/line-2.js"></script> <!-- Line chart script -->
+    <script src="js/histogram.js"></script> <!-- Histogram script -->
+    <script src="js/map.js"></script> <!-- Map functions (if needed) -->
+    <script src="js/load-data.js"></script> <!-- CSV loader -->
 </body>
+
 </html>

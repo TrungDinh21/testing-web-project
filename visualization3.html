@@ -1,22 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <!-- Metadata -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/visualization.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <title>Fairness Comparison</title>
 </head>
+
 <body>
+
+    <!-- ========================= HEADER & NAVIGATION ========================= -->
     <header>
-        <div class = "nav-container">
+        <div class="nav-container">
+
+            <!-- Group Name -->
             <div class="team-headline">
                 <p>DV Group 48</p>
             </div>
-             <div class="menu-toggle" id="menu-toggle">
-                ☰
-            </div>
+
+            <!-- Mobile Sidebar Toggle -->
+            <div class="menu-toggle" id="menu-toggle">☰</div>
+
+            <!-- Main Navigation Menu -->
             <div class="nav-links" id="nav-links">
                 <nav>
                     <ul>
@@ -28,40 +43,100 @@
                     </ul>
                 </nav>
             </div>
+
         </div>
     </header>
+
+    <!-- ========================= MAIN CONTENT ========================= -->
     <main>
-        <div id="filters"></div>
 
-        <div class="map-vis-container">
+        <!-- Dynamic filter bar inserted by JS -->
+        <div id="filters3"></div>
 
-            <h1>Penalties per 10,000 driver licences</h1>
+        <!-- ========================= INTRO SECTION ========================= -->
+        <section class="vis1-intro">
+            <h1>Fairness Comparison of Road Safety Enforcement Across Australia</h1>
 
-            <div id="bar-1"></div>
+            <p>
+                This page enables users to compare the fairness of road safety enforcement among Australian
+                jurisdictions.
+                The visualisations below present both total penalties and penalties per 10,000 driver
+                licences, helping users determine whether variations in enforcement are due to stricter policing or
+                larger driving populations.
+                <br><br>
+                Use the filters above to select specific years, violation types, detection methods, and age groups.
+                The bar charts update dynamically based on your selections. Hovering over any bar reveals detailed
+                statistics on fines, charges, and arrests.
+            </p>
+        </section>
 
-        </div>
-        <div class="map-vis-container">
+        <!-- ========================= TWO-COLUMN CHART GRID ========================= -->
+        <section class="fairness-grid">
 
-            <h1>Total penalties across all jurisdictions</h1>
+            <!-- Normalised Penalties (per 10k licences) -->
+            <div class="fairness-chart">
+                <h2>Penalties per 10,000 Driver Licences</h2>
+                <div id="bar-1"></div>
+            </div>
 
-            <div id="bar-2"></div>
+            <!-- Absolute Total Penalties -->
+            <div class="fairness-chart">
+                <h2>Total Penalties by Jurisdiction</h2>
+                <div id="bar-2"></div>
+            </div>
 
-        </div>
-        
+        </section>
+
+        <!-- ========================= INTERPRETATION SECTION ========================= -->
+        <section class="fairness-analysis">
+
+            <p>
+                When adjusted for population size, smaller jurisdictions such as the Northern Territory often display
+                higher per-licence penalty rates. This may reflect stricter enforcement practices, demographic factors,
+                or differences in camera placement and policing resources.
+            </p>
+
+            <p>
+                In contrast, Victoria, Queensland, and New South Wales consistently show higher absolute penalty counts,
+                which is expected given their larger populations and extensive enforcement networks. Comparing absolute
+                and normalised values helps reveal jurisdictions with proportionally higher or lower enforcement
+                intensity.
+            </p>
+
+            <p>
+                Together, these visualisations provide a balanced and transparent assessment of road safety enforcement
+                across Australia. By presenting two complementary perspectives, the Fairness Comparison page supports
+                critical and meaningful interpretation of policing practices nationwide.
+            </p>
+
+        </section>
+
+        <!-- ========================= DATA LIMITATIONS NOTE ========================= -->
+        <p style="color:rgb(73, 73, 73); font-size: 12px; font-style:italic; margin: 20px;">
+            The dataset includes several limitations that may affect interpretation.
+            Manual enforcement speeding data is incomplete prior to 2016.
+            Unlicensed driving and age group categories are mainly recorded from 2023–2024.
+            Variations in population, data coverage, and the number of detection cameras across states influence penalty
+            counts.
+            Therefore, figures should be viewed as indicative rather than directly comparable across jurisdictions.
+        </p>
+
     </main>
+
+    <!-- ========================= FOOTER ========================= -->
     <footer>
         <p>Data sourced from the Bureau of Infrastructure and Transport Research Economics (BITRE)</p>
-        <p>&copy;August2025 - Group 48 | Swinburne University of Technology</p>
+        <p>&copy; August 2025 - Group 48 | Swinburne University of Technology</p>
     </footer>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-  <script src="js/nav.js"></script>
-  <script src="js/interaction.js"></script>
-  <script src="js/line-2.js"></script>
-  <script src="js/histogram.js"></script>
-  <script src="js/map.js"></script>
-  <script src="js/line-1.js"></script>
-  <script src="js/bar-1.js"></script>
-  <script src="js/bar-2.js"></script>
-  <script src="js/load-data.js"></script>
+
+    <!-- ========================= JAVASCRIPT FILES ========================= -->
+    <script src="https://d3js.org/d3.v7.min.js"></script> <!-- D3 library -->
+    <script src="js/nav.js"></script> <!-- Mobile navigation -->
+    <script src="js/interaction.js"></script> <!-- Filters & UI interactions -->
+    <script src="js/bar-1.js"></script> <!-- Per-10k Bar Chart -->
+    <script src="js/bar-2.js"></script> <!-- Total Penalty Bar Chart -->
+    <script src="js/load-data.js"></script> <!-- CSV Data Loader -->
+
 </body>
+
 </html>

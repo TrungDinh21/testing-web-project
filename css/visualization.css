@@ -1,92 +1,220 @@
+/* ------------------------------------------ */
+/* MAP SECTION STYLING */
+/* ------------------------------------------ */
+
+/* Container for the map visualisation */
 #map {
     width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
+    max-width: 800px;
+    margin: 0 auto; /* center map */
 }
 
+/* Inner container for layout constraints */
 .map-vis-container {
-    max-width: 900px;
+    max-width: 600px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 10px;
 }
 
+/* Row layout fix when map is inside .vis-row */
 .vis-row .map-vis-container {
-    flex: 1.5;
+    flex: 1;
     margin: 0;
-    max-width: none;
+    max-width: none; /* remove width limit when side-by-side */
 }
 
-
+/* Reset Zoom button */
 #resetZoom {
     padding: 5px;
     margin-left: 20px;
     border-radius: 4px;
     font-family: 'Poppins', sans-serif;
+    border: 1px solid #333;
+    background: none;
 }
 
-#resetZoom:hover{
+/* Hover effect for reset button */
+#resetZoom:hover {
     font-weight: bold;
-    background-color: #ccc;
+    color: #ffffff;
+    background:#888;
 }
+
+/* ------------------------------------------ */
+/* LINE CHART 1 */
+/* ------------------------------------------ */
 
 #line-1 {
   width: 100%;
-  max-width: 900px;     
-  margin: 20px auto; 
+  max-width: 800px; /* container size */
+  margin: 0 auto 0;
   border-radius: 8px;
 }
 
+/* Make SVG responsive */
 #line-1 svg {
   width: 100%;
   height: auto;
   display: block;
 }
 
+/* ------------------------------------------ */
+/* VISUALIZATION 1 FILTERS (MAP + LINE1) */
+/* ------------------------------------------ */
 
 #filters {
-    background: #C3E0E0;
-    border-radius: 8px;
-    padding: 1rem;
-    margin: 1rem auto;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
-    align-items: center;
-    max-width: 900px;
-    font-size: 12px;
-    position: sticky;
-    top: 10px;
-    z-index: 1000;
+  padding: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center; /* center controls */
+  align-items: center;
+  font-size: 12px;
+
+  /* Sticky filter bar at top */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  /* Blur background effect */
+  background: rgba(152, 188, 230, 0.85);
+  backdrop-filter: blur(6px);
+
+  border-bottom: 1px solid #e5e5e5;
+  max-width: 100%;
+  overflow-x: auto; /* prevent overflowing */
 }
 
+/* Rounded pill-style select */
+.filter-group select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #f5f5f5;
+  color: #222;
+  border: none;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  line-height: 1.1;
+  white-space: nowrap;
+}
 
 .filter-group {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 12px;
+  flex-shrink: 0; /* prevent shrinking on small screens */
 }
 
-/* Label */
-.filter-group label {
-    font-weight: 600;
-    color: #333;
-    font-size: 12px;
+/* ------------------------------------------ */
+/* FILTERS FOR STATE TRENDS (LINE 2 + HISTOGRAM) */
+/* ------------------------------------------ */
+
+#filters2 {
+  padding: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(152, 188, 230, 0.85);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid #e5e5e5;
+  max-width: 100%;
+  overflow-x: auto;
 }
 
-/* Select */
-.filter-group select {
-    padding: 4px 8px;
-    border-radius: 6px;
-    border: 1px solid #888;
+.filter-group2 {
+  flex-shrink: 0;
 }
 
-/* VISUALIZATION 2 */
+.filter-group2 select {
+  appearance: none;
+  background-color: #f5f5f5;
+  color: #222;
+  border: none;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+/* Hover + focus behavior */
+.filter-group2 select:hover {
+  background-color: #e9e9e9;
+}
+
+.filter-group2 select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(60, 100, 180, 0.3);
+}
+
+/* ------------------------------------------ */
+/* FILTERS FOR FAIRNESS COMPARISON (BAR1 + BAR2) */
+/* ------------------------------------------ */
+
+#filters3 {
+  padding: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(152, 188, 230, 0.85);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid #e5e5e5;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.filter-group3 {
+  flex-shrink: 0;
+}
+
+.filter-group3 select {
+  appearance: none;
+  background-color: #f5f5f5;
+  color: #222;
+  border: none;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-group3 select:hover {
+  background-color: #e9e9e9;
+}
+.filter-group3 select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(60, 100, 180, 0.3);
+}
+
+/* ------------------------------------------ */
+/* LINE CHART 2 */
+/* ------------------------------------------ */
+
 #line-2 {
   width: 100%;
-  max-width: 900px;     
-  margin: 20px auto; 
+  max-width: 900px;
+  margin: 20px auto;
   border-radius: 8px;
 }
 
@@ -96,10 +224,14 @@
   display: block;
 }
 
+/* ------------------------------------------ */
+/* HISTOGRAM */
+/* ------------------------------------------ */
+
 #histogram {
   width: 100%;
-  max-width: 900px;     
-  margin: 20px auto; 
+  max-width: 900px;
+  margin: 20px auto;
   border-radius: 8px;
 }
 
@@ -109,10 +241,14 @@
   display: block;
 }
 
+/* ------------------------------------------ */
+/* BAR CHART 1 */
+/* ------------------------------------------ */
+
 #bar-1 {
   width: 100%;
-  max-width: 900px;     
-  margin: 20px auto; 
+  max-width: 900px;
+  margin: 20px auto;
   border-radius: 8px;
 }
 
@@ -122,10 +258,14 @@
   display: block;
 }
 
+/* ------------------------------------------ */
+/* BAR CHART 2 */
+/* ------------------------------------------ */
+
 #bar-2 {
   width: 100%;
-  max-width: 900px;     
-  margin: 20px auto; 
+  max-width: 900px;
+  margin: 20px auto;
   border-radius: 8px;
 }
 
@@ -134,32 +274,31 @@
   height: auto;
   display: block;
 }
-/*Responsive*/
+
+/* ------------------------------------------ */
+/* RESPONSIVE DESIGN */
+/* ------------------------------------------ */
+
 @media screen and (max-width: 768px) {
-    #filters {
-        display: flex;
-        align-items: center;
-        max-width: 600px;
-    }
-    .filter-group {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    }
-    .filter-group label {
-        font-weight: 100;
-        color: #333;
-        font-size: 10px;
-    }
-    .filter-group select {
-        padding: 0;
-        border-radius: 6px;
-        border: 1px solid #888;
-        font-size: 10px;
-    }
 
-    .filter-group select option {
-        font-size: 10px;
-    }
+  /* Responsive layout for filters */
+  #filters {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    padding: 0.6rem;
+  }
+
+  /* Each filter takes 45% width on mobile */
+  .filter-group {
+    flex: 1 1 45%;
+    justify-content: center;
+  }
+
+  /* Smaller select style */
+  .filter-group select {
+    width: auto;
+    font-size: 12px;
+    padding: 4px 10px;
+  }
 }
-

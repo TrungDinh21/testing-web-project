@@ -1,21 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Basic metadata and responsive settings -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Base stylesheet -->
     <link rel="stylesheet" href="css/base.css">
+
+    <!-- Google Fonts: Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <title>About</title>
 </head>
+
 <body>
+
+    <!-- ==========================
+         HEADER + NAVIGATION
+         ========================== -->
     <header>
-        <div class = "nav-container">
+        <div class="nav-container">
+
+            <!-- Group Name -->
             <div class="team-headline">
                 <p>DV Group 48</p>
             </div>
-             <div class="menu-toggle" id="menu-toggle">
+
+            <!-- Mobile Menu Toggle Icon -->
+            <div class="menu-toggle" id="menu-toggle">
                 ☰
             </div>
+
+            <!-- Navigation Links -->
             <div class="nav-links" id="nav-links">
                 <nav>
                     <ul>
@@ -27,17 +44,189 @@
                     </ul>
                 </nav>
             </div>
+
         </div>
     </header>
-    <main>
-        
+
+    <!-- ==========================
+         MAIN ABOUT PAGE CONTENT
+         ========================== -->
+    <main class="about-page">
+
+        <!-- Page Header -->
+        <h1>About This Project</h1>
+
+        <!-- ==========================
+             GROUP INFORMATION TABLE
+             ========================== -->
+        <section class="group-infor">
+            <h2>Group Information</h2>
+
+            <!-- Table listing group members and roles -->
+            <table>
+                <tr>
+                    <th>NAME</th>
+                    <th>STUDENT ID</th>
+                    <th>ROLE</th>
+                </tr>
+
+                <!-- Member 1 -->
+                <tr>
+                    <td>Chan Trung Dinh</td>
+                    <td>105060533</td>
+                    <td>Data Collection & Web Dev</td>
+                </tr>
+
+                <!-- Member 2 -->
+                <tr>
+                    <td>Andrew Lim Zhi Xuan</td>
+                    <td>105728462</td>
+                    <td>UI Designer & Content Lead</td>
+                </tr>
+
+                <!-- Member 3 -->
+                <tr>
+                    <td>Chia Choon Yu</td>
+                    <td>105951129</td>
+                    <td>Data Processing & Web Dev</td>
+                </tr>
+
+            </table>
+        </section>
+
+        <!-- ==========================
+             DATA INFORMATION SECTION
+             ========================== -->
+        <section class="about-data">
+
+            <!-- ---- Privacy ---- -->
+            <h2>About the Data</h2>
+            <div>
+                <h3>Privacy</h3>
+
+                <!-- Privacy points (Aggregated data only, safe to use) -->
+                <ul>
+                    <li>The datasets used in this project contain only aggregated enforcement figures at state level.</li>
+                    <li>No personal, private, or individual identifiable information is included.</li>
+                    <li>All data compiles with Australian Governement open-data privacy standard.</li>
+                </ul>
+            </div>
+
+            <!-- ---- Accuracy & Limitations ---- -->
+            <div>
+                <h3>Accuracy & Limitations</h3>
+
+                <p>The available data has varying degrees of completeness across years:</p>
+
+                <!-- Repeated list (kept exactly as you wrote, unchanged) -->
+                <ul>
+                    <li>The datasets used in this project contain only aggregated enforcement figures at state level.</li>
+                    <li>No personal, private, or individual identifiable information is included.</li>
+                    <li>All data compiles with Australian Governement open-data privacy standard.</li>
+                </ul>
+
+                <p>Therefore, long-term comparisons primaryli focus on fines.</p>
+            </div>
+
+            <!-- ---- Bias Considerations ---- -->
+            <div>
+                <h3>Bias</h3>
+
+                <p>Raw penalty counts can be influenced by differences in:</p>
+
+                <!-- Repeated list (unchanged as requested) -->
+                <ul>
+                    <li>The datasets used in this project contain only aggregated enforcement figures at state level.</li>
+                    <li>No personal, private, or individual identifiable information is included.</li>
+                    <li>All data compiles with Australian Governement open-data privacy standard.</li>
+                </ul>
+
+                <p>
+                    To reduce bias, the project includes penalties per 10,000 driver licences for a fairer interstate comparion.
+                    <br>These results should be interpreted as indicative, not absolute.
+                </p>
+            </div>
+
+            <!-- ---- Data Ethics ---- -->
+            <div>
+                <h3>Data Ethics</h3>
+
+                <ul>
+                    <li>All datasets are openly available public government records.</li>
+                    <li>Used solely for educational and analytical purposes.</li>
+                    <li>No individual-level data accessed or handled.</li>
+                    <li>Visualizations aim to support transparency, not target or judge states or demographics.</li>
+                </ul>
+            </div>
+
+            <!-- ---- Data Sources ---- -->
+            <div>
+                <h3>Data Sources</h3>
+
+                <!-- Primary dataset -->
+                <h4>Primary Dataset:</h4>
+                <p>Bureau of Infrastructure and Transport Research Economics (BITRE) – Road Safety Enforcement Data</p>
+                <a href="https://catalogue.data.infrastructure.gov.au/dataset/road-safety-enforcement-data">[Link to the website]</a>
+
+                <!-- Licence counts -->
+                <h4>Driver Licence Counts (2010-2024)</h4>
+                <p>Manually compiled from the official Police Enforcement Dashboard due to lack of downloadable dataset.</p>
+                <a href="https://app.powerbi.com/view?r=eyJrIjoiZTAxY2EyOTAtYTdhMS00NTRiLWI0NDktM2U1ZDI0NzY0ZTU5IiwidCI6ImFhMjFiNjQwLWJhYzItNDU2ZC04NTA1LWYyY2MwN2Y1MTc4NCJ9">[Link to the dashboard]</a>
+                <p>All data is publicly accessible under Australian Open Government Data License.</p>
+            </div>
+
+            <!-- ---- Data Dictionary PDF ---- -->
+            <div>
+                <h3>Data Dictionary</h3>
+                <p>A complete reference to data fields and definitions is available here:</p>
+
+                <!-- PDF link -->
+                <a href="documents/data-dictionary.pdf">[View Data Dictionary (PDF)]</a>
+            </div>
+
+        </section>
+
+        <!-- ==========================
+             TOOLS & TECHNOLOGIES USED
+             ========================== -->
+        <section class="tool-tech">
+            <h2>Tools & Technologies</h2>
+
+            <!-- List of tools -->
+            <ul>
+                <li>D3.js - interactive visualization</li>
+                <li>HTML / CSS/ JavaScript - fontend development</li>
+                <li>KNIME - data processing and cleaning</li>
+                <li>GitHub - version control</li>
+                <li>Swinburne Mercury Server - web hosting</li>
+            </ul>
+        </section>
+
+        <!-- ==========================
+             ACADEMIC DECLARATION
+             ========================== -->
+        <section class="ac-declaration">
+            <h2>Academic Declaration</h2>
+
+            <p>This website was developed for the unit COS30045 - Data Visualization at Swinburne University.</p>
+            <p>We declare that all work presented is original, all data sources have been acknowledge, no paind assistance or plagiarism was involved.</p>
+            <p>This project is for academic purposes only.</p>
+        </section>
+
     </main>
+
+    <!-- ==========================
+         FOOTER
+         ========================== -->
     <footer>
         <p>Data sourced from the Bureau of Infrastructure and Transport Research Economics (BITRE)</p>
         <p>&copy;August2025 - Group 48 | Swinburne University of Technology</p>
     </footer>
+
+    <!-- Scripts: D3.js + Navigation Script + Data Loader -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="js/nav.js"></script>
     <script src="js/load-data.js"></script>
+
 </body>
 </html>

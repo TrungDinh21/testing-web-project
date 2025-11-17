@@ -1,22 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta settings for proper rendering -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Base styles and page-specific styles -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/visualization.css">
+
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <title>Natitonal Overview</title>
+
+    <title>National Overview</title>
 </head>
+
 <body>
+    <!-- ========================= HEADER & NAVIGATION ========================= -->
     <header>
-        <div class = "nav-container">
+        <div class="nav-container">
+
+            <!-- Team name shown on navigation bar -->
             <div class="team-headline">
                 <p>DV Group 48</p>
             </div>
-             <div class="menu-toggle" id="menu-toggle">
-                ☰
-            </div>
+
+            <!-- Mobile menu toggle button -->
+            <div class="menu-toggle" id="menu-toggle">☰</div>
+
+            <!-- Navigation links -->
             <div class="nav-links" id="nav-links">
                 <nav>
                     <ul>
@@ -30,62 +42,109 @@
             </div>
         </div>
     </header>
+
+    <!-- ========================= MAIN CONTENT ========================= -->
     <main>
-        <div id="filters"><button id="resetZoom">Reset Zoom</button></div>
+
+        <!-- Dynamic filter dropdown menus (inserted by JS) -->
+        <div id="filters"></div>
+
+        <!-- ========================= INTRO SECTION ========================= -->
         <section class="vis1-intro">
-            <h1>National Overview of Road Safety Enforcement in Australia (2008-2024)</h1>
+            <h1>Australia’s Road Safety: A National Overview of Traffic Penalties (2008–2024)</h1>
+
             <p>
-                This page provides a national-level overview of traffic law enforcement across Australia, 
-      based on data from the Bureau of Infrastructure and Transport Research Economics (BITRE).
-      The visualisations below allow users to explore how penalties such as fines, charges, and arrests 
-      vary across different states and over time.
-            </p>
-            <p>
-                Use the filters above to select specific <strong>years, penalty types, violation types, detection methods, age groups</strong> and <strong>jurisdiction</strong>. 
-      Hover over areas or lines for detailed statistics, and use the "Reset Zoom" button to return to the default view.
+                This page provides a nationwide view of traffic law enforcement across Australia from 2008 to 2024.
+                By combining a heat map and a time-series line chart, users can explore how penalties for offences such
+                as speeding, unlicensed driving, mobile phone use, and seatbelt violations vary across states and evolve
+                over time.
+                Use the filters to uncover trends or compare jurisdictions, from the busiest roads of Victoria
+                to the quieter territories in the north.
             </p>
         </section>
 
-        <section class = "vis1-map">
-            <h2>Traffic Penalties by State and Territory</h2>
-            <div class="map-vis-container">
-            <div id="map"></div>
+        <!-- ========================= HEAT MAP SECTION ========================= -->
+        <section class="vis1-map">
+            <h2>
+                Heat Map Section – Regional Distribution
+                <button id="resetZoom">Reset Zoom</button> <!-- Reset zoom button for map -->
+            </h2>
+
+            <div class="vis-row">
+                <!-- Map visualisation container (D3 renders here) -->
+                <div class="map-vis-container">
+                    <div id="map"></div>
+                </div>
+
+                <!-- Caption describing map insights -->
+                <p class="vis1-caption" style="padding-right: 20px;">
+                    The heat map reveals striking contrasts between states.<br>New South Wales (NSW) and Victoria (VIC)
+                    consistently record the highest number of traffic penalties, reflecting their larger populations
+                    and higher vehicle activity.<br>In contrast, smaller jurisdictions like the Northern Territory (NT)
+                    and the Australian Capital Territory (ACT) show far fewer offences, often fewer than 50,000 annually.
+                    <br><br>
+                    This spatial view highlights how enforcement intensity and driver behaviour differ nationwide, an
+                    essential context before exploring time-based trends.
+                </p>
             </div>
-            <p class="vis1-caption">
-                From the map above, it is evident that <strong>New South Wales</strong>,<strong> Queensland</strong>, and 
-    <strong>Victoria</strong> show higher penalty counts compared to smaller states such as Tasmania and the Northern Territory. 
-    This could reflect both larger populations and greater enforcement resources.
+        </section>
+
+        <!-- ========================= LINE CHART SECTION ========================= -->
+        <section class="vis1-line">
+            <h2>Line Chart Section – Trends Over Time</h2>
+
+            <div class="vis-row reverse">
+                <!-- Caption describing temporal insights -->
+                <p class="vis1-caption" style="padding-left: 20px;">
+                    From 2008 to 2024, overall penalties across Australia have fluctuated rather than followed a single direction.
+                    <br>- <strong>New South Wales</strong> (NSW) shows a sharp rise from around 600,000 to over one million by 2021.
+                    <br>- <strong>Queensland</strong> (QLD) shows two major surges and stabilises more than 900,000.
+                    <br>- <strong>Western Australia</strong> (WA) peaks around 2022 and has fallen in the following years.
+                    <br>- <strong>Victoria</strong> (VIC) trends downward after 2018.
+                    <br>- <strong>Tasmania</strong> (TAS) declines notably between 2012 and 2019.
+                    <br>- <strong>ACT</strong> remains consistently low with minor fluctuations.
+                </p>
+
+                <!-- Line chart visualisation container -->
+                <div class="map-vis-container">
+                    <div id="line-1"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================= SUMMARY PARAGRAPH ========================= -->
+        <section class="vis1-intro">
+            <p>
+                Overall, Australia’s traffic enforcement shows waves of rise and fall rather than a single trend.
+                Yet, each state tells a different story, from New South Wales' dramatic spikes to Tasmania’s steady decline.
+                <br>
+                Explore the <a href="visualization2.html">State Trend</a> page to uncover what drives these differences.
             </p>
         </section>
 
-        <section class = "vis1-line">
-            <h2>Yearly Trend of Traffic Penalties (2008-2024)</h2>
-            <div class="map-vis-container">
-            <div id="line-1"></div>
-            </div>
-            <p class="vis1-caption">
-                Overall, the total number of penalties across Australia shows a moderate fluctuation from 2008 to 2024, 
-    with peaking at 2021 and a gradual decline in recent years. 
-    The data suggests that enforcement activity has remained consistent nationwide, 
-    with no extreme increases or decreases observed over the long term.
-    <br>
-     It is important to note that <strong>data for arrests and charges is only available for 2023 and 2024</strong>. 
-    Therefore, long-term comparisons for these categories are not included in this trend analysis. 
-    Earlier years mainly contain fine-related records collected under broader enforcement reporting methods.
-            </p>
-        </section>
-        
+        <!-- ========================= DATA LIMITATIONS NOTE ========================= -->
+        <p style="color:rgb(73, 73, 73); font-size: 12px; font-style:italic; margin: 20px;">
+            The dataset includes several limitations that may affect interpretation.
+            Manual enforcement speeding data is incomplete prior to 2016.
+            Unlicensed driving and age group categories are mainly recorded from 2023–2024.
+            Variations in population, data coverage, and the number of detection cameras across states influence penalty counts.
+            Therefore, figures should be viewed as indicative rather than directly comparable across jurisdictions.
+        </p>
+
     </main>
+
+    <!-- ========================= FOOTER ========================= -->
     <footer>
         <p>Data sourced from the Bureau of Infrastructure and Transport Research Economics (BITRE)</p>
-        <p>&copy;August2025 - Group 48 | Swinburne University of Technology</p>
+        <p>&copy; August 2025 - Group 48 | Swinburne University of Technology</p>
     </footer>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="js/nav.js"></script>
-    <script src="js/map.js"></script>
-    <script src="js/line-1.js"></script>
-    <script src="js/interaction.js"></script>
-    <script src="js/load-data.js"></script>
 
+    <!-- ========================= JAVASCRIPT LIBRARIES & SCRIPTS ========================= -->
+    <script src="https://d3js.org/d3.v7.min.js"></script> <!-- D3.js library -->
+    <script src="js/nav.js"></script>                     <!-- Mobile navigation script -->
+    <script src="js/map.js"></script>                     <!-- Heat map script -->
+    <script src="js/line-1.js"></script>                  <!-- Line chart script -->
+    <script src="js/load-data.js"></script>               <!-- Data loading script -->
+    <script src="js/interaction.js"></script>             <!-- Filter and interaction logic -->
 </body>
 </html>
